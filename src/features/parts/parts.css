@@ -1,0 +1,40 @@
+.type-picker { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
+.type-picker__option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: var(--space-2);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.type-picker__option[aria-checked="true"] { background: var(--color-primary-soft); font-weight: 700; }
+.type-picker__count {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 20px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--color-primary);
+  color: #fff;
+  font-size: 0.72rem;
+}
+
+.parts-list { list-style: none; margin: 0; padding: 0; max-height: 320px; overflow-y: auto; display: flex; flex-direction: column; gap: var(--space-2); }
+.parts-list__item { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
+.parts-list__dot { width: 12px; height: 12px; border-radius: 50%; flex: none; }
+.parts-list__name { flex: 1 1 80px; font-weight: 600; font-size: 0.9rem; }
+.parts-list__select { min-height: 34px; width: auto; min-width: 0; flex: 1 1 100px; font-size: 0.85rem; }
+.parts-list__delete { border: none; background: none; color: var(--color-danger); font-size: 1rem; cursor: pointer; padding: var(--space-2); }
+
+/* on a phone the delete button stays beside the name and the selects take the row below */
+@media (max-width: 480px) {
+  .parts-list__delete { order: 1; margin-left: auto; }
+  .parts-list__select { order: 2; }
+}

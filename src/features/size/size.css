@@ -1,0 +1,18 @@
+.choices { display: grid; gap: var(--space-2); }
+.choice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.choice[aria-checked="true"] { border-color: var(--color-primary); background: var(--color-primary-soft); }
+.choice__label { font-weight: 600; }
+.more summary { cursor: pointer; font-weight: 600; color: var(--color-primary); }
+.more { display: flex; flex-direction: column; gap: var(--space-2); }

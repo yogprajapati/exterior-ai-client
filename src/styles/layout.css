@@ -1,0 +1,61 @@
+.app-header {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+.app-header__inner {
+  max-width: var(--page-width);
+  margin: 0 auto;
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.brand { font-weight: 700; font-size: 1.15rem; color: var(--color-primary); text-decoration: none; }
+
+.stepper { display: flex; gap: var(--space-2); list-style: none; padding: 0; margin: 0 0 var(--space-5); flex-wrap: wrap; }
+.stepper__item { flex: 1 1 140px; }
+.stepper__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-muted);
+  text-decoration: none;
+  font-weight: 600;
+}
+.stepper__number {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--color-border);
+  color: var(--color-text);
+  font-size: 0.85rem;
+  flex: none;
+}
+.stepper__link--active { border-color: var(--color-primary); color: var(--color-primary); background: var(--color-primary-soft); }
+.stepper__link--active .stepper__number { background: var(--color-primary); color: #fff; }
+.stepper__link--locked { opacity: 0.55; cursor: not-allowed; }
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: var(--space-4);
+  align-items: start;
+}
+@media (max-width: 960px) { .workspace { grid-template-columns: 1fr; } }
+/* keep the controls beside a tall photo while scrolling */
+@media (min-width: 961px) { .workspace__panel { position: sticky; top: var(--space-4); max-height: calc(100vh - 2 * var(--space-4)); overflow-y: auto; } }
+.workspace__panel { display: flex; flex-direction: column; gap: var(--space-3); }
+.step-title { margin-bottom: var(--space-4); }
+.step-actions { display: flex; justify-content: space-between; gap: var(--space-3); margin-top: var(--space-5); flex-wrap: wrap; }
+.step-actions--end { justify-content: flex-end; align-items: center; }
+
+/* a photo is never taller than the screen allows: its frame narrows instead, keeping the photo's shape */
+.photo-frame { width: min(100%, calc(var(--photo-max-height) * var(--photo-ratio))); margin-inline: auto; }
+.photo-shape { aspect-ratio: var(--photo-ratio); }

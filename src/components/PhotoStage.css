@@ -1,0 +1,27 @@
+.stage {
+  position: relative;
+  width: 100%;
+  background: #1d2b32;
+  border-radius: var(--radius);
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+}
+.stage img,
+.stage canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.stage canvas { cursor: crosshair; }
+.stage__busy {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  padding: var(--space-2) var(--space-3);
+  background: rgb(255 255 255 / 0.95);
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+  pointer-events: none;
+}
