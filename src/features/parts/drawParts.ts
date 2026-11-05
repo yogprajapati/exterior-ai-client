@@ -1,15 +1,15 @@
-import type { Point } from "../../types";
 import type { MaskLayer } from "../../hooks/useMaskLayers";
+import type { Point } from "../../types";
 
 const OUTLINE = "#ff9f1c";
 
-/** Draws the confirmed parts and the outline being drawn. */
-export function drawParts(ctx: CanvasRenderingContext2D, pixelRatio: number, layers: Iterable<MaskLayer>, outline: Point[]): void {
-  ctx.globalAlpha = 0.45;
-  for (const { canvas, x, y } of layers) ctx.drawImage(canvas, x, y);
-  ctx.globalAlpha = 1;
-  if (outline.length === 0) return;
+interface PartsOverlay {
+  layers: Map<string, MaskLayer>;
+  selectedId: string | null;
+  outline: Point[];
+}
 
+function drawOutline(ctx: CanvasRenderingContext2D, pixelRatio: number, outline: Point[]): void {
   ctx.strokeStyle = OUTLINE;
   ctx.lineWidth = 3 * pixelRatio;
   ctx.beginPath();
@@ -24,4 +24,14 @@ export function drawParts(ctx: CanvasRenderingContext2D, pixelRatio: number, lay
     ctx.fill();
     ctx.stroke();
   }
+}
+
+export function drawParts(ctx: CanvasRenderingContext2D, pixelRatio: number, { layers, selectedId, outline }: PartsOverlay): void {
+  ctx.globalAlpha = 0.45;
+  for (const [id, { canvas, x, y }] of layers) {
+    ctx.drawImage(canvas, x, y);
+    if (id === selectedId) ctx.drawImage(canvas, x, y);
+  }
+  ctx.globalAlpha = 1;
+  if (outline.length > 0) drawOutline(ctx, pixelRatio, outline);
 }

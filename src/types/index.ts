@@ -16,6 +16,7 @@ export type Category = Schemas["Category"];
 export type Estimate = Schemas["Estimate"];
 export type MaterialLine = Schemas["MaterialLine"];
 export type TypeTotal = Schemas["TypeTotal"];
+export type MaskData = Schemas["MaskData"];
 export type JobStatus = Schemas["JobStatus"];
 export type RenderStatus = Schemas["RenderStatus"];
 export type QualityIssue = Schemas["QualityIssue"];

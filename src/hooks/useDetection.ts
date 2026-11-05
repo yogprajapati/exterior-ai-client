@@ -6,11 +6,6 @@ import type { Project } from "../types";
 
 const POLL_MS = 1500;
 
-/**
- * Runs the server's automatic detection for a project that has no saved parts, and reports its progress.
- * The Size step calls it too, so detection runs while the user sets the size; both steps share one result.
- * `found` holds the detected parts once they are ready and the project has a surface to put them on.
- */
 export function useDetection(project: Project) {
   const queryClient = useQueryClient();
   const needed = project.regions.length === 0;
@@ -33,8 +28,7 @@ export function useDetection(project: Project) {
     if (needed && state === "idle" && start.isIdle) start.mutate();
   }, [needed, state, start]);
 
-  const done = state === "done" && project.planes.length > 0;
-  const parts = useQuery({ queryKey: queryKeys.detectedParts(project.id), queryFn: () => detectionApi.parts(project.id), enabled: needed && done, staleTime: Infinity });
+  const parts = useQuery({ queryKey: queryKeys.detectedParts(project.id), queryFn: () => detectionApi.parts(project.id), enabled: needed && state === "done", staleTime: Infinity });
 
   const failed = state === "failed" || status.isError || start.isError || parts.isError;
   return {
