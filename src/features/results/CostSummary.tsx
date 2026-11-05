@@ -15,7 +15,7 @@ export function CostSummary({ estimate }: { estimate: Estimate }) {
         </span>
       </div>
       <dl className="breakdown">
-        <dt>Materials</dt>
+        <dt>Materials and preparation</dt>
         <dd>{formatInr(estimate.material_total)}</dd>
         <dt>Labour</dt>
         <dd>{formatInr(estimate.labor_total)}</dd>
