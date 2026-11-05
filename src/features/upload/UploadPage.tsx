@@ -5,6 +5,7 @@ import { Card } from "../../components/ui/Card";
 import { useCreateProject } from "../../hooks/useProject";
 import { lastProject } from "../../utils/storage";
 import { DropZone } from "./DropZone";
+import { Limitations } from "./Limitations";
 import { SamplePhotos } from "./SamplePhotos";
 import "./upload.css";
 
@@ -33,7 +34,7 @@ export function UploadPage() {
     <div className="upload stack">
       <div>
         <h1>See your house with new materials and know the cost</h1>
-        <p className="muted">Upload a photo, pick paint, stone, tiles or railings, and get a quantity and cost estimate you can share with your contractor.</p>
+        <p className="muted">Upload a photo, pick paint, stone, tiles or railings, and get a quantity and cost estimate you can share with your contractor. <Link to="/examples">See sample reports</Link>.</p>
       </div>
 
       <DropZone onFile={upload} loading={create.isPending} />
@@ -66,6 +67,8 @@ export function UploadPage() {
           ))}
         </ul>
       </Card>
+
+      <Limitations />
     </div>
   );
 }

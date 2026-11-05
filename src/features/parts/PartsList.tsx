@@ -5,12 +5,14 @@ import "./parts.css";
 interface PartsListProps {
   regions: Region[];
   planes: Plane[];
+  selectedId: string | null;
+  onSelect: (id: string) => void;
   onChange: (id: string, patch: Partial<Pick<Region, "type" | "plane_id">>) => void;
   onDelete: (id: string) => void;
 }
 
 /** Marked parts, numbered per type, with controls to relabel, move to another surface, or remove. */
-export function PartsList({ regions, planes, onChange, onDelete }: PartsListProps) {
+export function PartsList({ regions, planes, selectedId, onSelect, onChange, onDelete }: PartsListProps) {
   const seen: Partial<Record<RegionType, number>> = {};
   return (
     <ul className="parts-list">
@@ -18,11 +20,11 @@ export function PartsList({ regions, planes, onChange, onDelete }: PartsListProp
         const number = (seen[region.type] = (seen[region.type] ?? 0) + 1);
         const { label, color } = REGION_TYPES[region.type];
         return (
-          <li key={region.id} className="parts-list__item">
+          <li key={region.id} className={region.id === selectedId ? "parts-list__item parts-list__item--selected" : "parts-list__item"}>
             <span className="parts-list__dot" style={{ background: color }} aria-hidden="true" />
-            <span className="parts-list__name">
+            <button type="button" className="parts-list__name" aria-pressed={region.id === selectedId} onClick={() => onSelect(region.id)}>
               {label} {number}
-            </span>
+            </button>
             <select
               className="input parts-list__select"
               aria-label={`Type of ${label} ${number}`}

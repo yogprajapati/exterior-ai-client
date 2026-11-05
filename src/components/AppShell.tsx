@@ -11,9 +11,14 @@ export function AppShell() {
           <Link to="/" className="brand">
             🏠 Exterior Renovation Planner
           </Link>
-          <Link to="/" className="btn btn--secondary btn--small">
-            New project
-          </Link>
+          <nav className="row">
+            <Link to="/examples" className="btn btn--ghost btn--small">
+              Sample reports
+            </Link>
+            <Link to="/" className="btn btn--secondary btn--small">
+              New project
+            </Link>
+          </nav>
         </div>
       </header>
       <main className="page stack">

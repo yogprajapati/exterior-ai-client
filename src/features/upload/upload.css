@@ -17,4 +17,6 @@
 .dropzone--active { background: var(--color-primary-soft); }
 .dropzone:focus-within { outline: 3px solid var(--color-primary); outline-offset: 2px; }
 .dropzone__icon { font-size: 2.5rem; }
-.upload__tips { margin: 0; padding-left: var(--space-5); }
+.upload__tips,
+.upload__list { margin: 0; padding-left: var(--space-5); }
+.upload__list li + li { margin-top: var(--space-2); }

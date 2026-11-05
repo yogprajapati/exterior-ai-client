@@ -117,10 +117,7 @@ export interface paths {
         /** Read Detection */
         get: operations["read_detection_api_projects__project_id__detect_get"];
         put?: never;
-        /**
-         * Start Detection
-         * @description Finds the parts of the house in the background (it can run while the user sets the size); fetch them from /detect/parts.
-         */
+        /** Start Detection */
         post: operations["start_detection_api_projects__project_id__detect_post"];
         delete?: never;
         options?: never;
@@ -135,10 +132,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /**
-         * Read Detected Parts
-         * @description The parts found by a finished detection, placed on the project's first surface.
-         */
+        /** Read Detected Parts */
         get: operations["read_detected_parts_api_projects__project_id__detect_parts_get"];
         put?: never;
         post?: never;
@@ -157,11 +151,42 @@ export interface paths {
         };
         get?: never;
         put?: never;
-        /**
-         * Find More
-         * @description Looks for one more kind of part by name; the result is returned for the user to accept, not saved.
-         */
+        /** Find More */
         post: operations["find_more_api_projects__project_id__find_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/masks/grow": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Grow Mask */
+        post: operations["grow_mask_api_masks_grow_post"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/api/masks/erase": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Erase Mask */
+        post: operations["erase_mask_api_masks_erase_post"];
         delete?: never;
         options?: never;
         head?: never;
@@ -212,10 +237,7 @@ export interface paths {
         /** Read Render */
         get: operations["read_render_api_projects__project_id__designs__design_id__render_get"];
         put?: never;
-        /**
-         * Start Render
-         * @description Redesigns the photo in the background (an AI edit takes up to a minute); poll /render/status, then fetch /render.
-         */
+        /** Start Render */
         post: operations["start_render_api_projects__project_id__designs__design_id__render_post"];
         delete?: never;
         options?: never;
@@ -302,6 +324,13 @@ export interface components {
                 [key: string]: string;
             };
         };
+        /** EraseRequest */
+        EraseRequest: {
+            /** Mask Png */
+            mask_png: string;
+            /** Erase Png */
+            erase_png: string;
+        };
         /** Estimate */
         Estimate: {
             /** Design Id */
@@ -331,6 +360,13 @@ export interface components {
             phrase: string;
             type: components["schemas"]["RegionType"];
         };
+        /** GrowRequest */
+        GrowRequest: {
+            /** Mask Png */
+            mask_png: string;
+            /** Pixels */
+            pixels: number;
+        };
         /** HTTPValidationError */
         HTTPValidationError: {
             /** Detail */
@@ -357,6 +393,11 @@ export interface components {
             error?: string | null;
             /** Note */
             note?: string | null;
+        };
+        /** MaskData */
+        MaskData: {
+            /** Mask Png */
+            mask_png: string;
         };
         /** Material */
         Material: {
@@ -1021,6 +1062,72 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["Region"][];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    grow_mask_api_masks_grow_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GrowRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MaskData"];
+                };
+            };
+            /** @description Validation Error */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["HTTPValidationError"];
+                };
+            };
+        };
+    };
+    erase_mask_api_masks_erase_post: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EraseRequest"];
+            };
+        };
+        responses: {
+            /** @description Successful Response */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MaskData"];
                 };
             };
             /** @description Validation Error */
